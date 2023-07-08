@@ -20,13 +20,16 @@ type Provider = {
 const AuthProviders = () => {
     const [providers, setProviders] = useState<Providers | null>(null);
 
-    useEffect(() => {
-        const fetchProviders = async () => {
+    const fetchProviders = async () => {
+        try{
             const res = await getProviders();
-    
             setProviders(res);
+        }catch(err){
+            console.log(err);
         }
+    }
 
+    useEffect(() => {
         fetchProviders();
     }, []);
 
